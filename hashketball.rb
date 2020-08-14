@@ -128,43 +128,66 @@ def game_hash
 end
 
 # Write code here
-def players
-  game_hash[:home][:players].merge(game_hash[:away][:players])
-end
-
-def teams(team_name)
-  case team_name
-  when game_hash[:home][:team_name]
-    game_hash[:home]
-  when game_hash[:away][:team_name]
-    game_hash[:away]
-  end
-end
-
 def num_points_scored(player_name)
-  players[player_name][:points]
+  game_hash.each do |team, team_data|
+    team_data[:players].each do |player|
+      if player[:player_name] == player_name
+        return player[:points]
+      end
+    end
+  end
 end
 
 def shoe_size(player_name)
-  players[player_name][:shoe]
-end
-
-def team_colors(team_name)
-  team(team_name)[:colors]
-end
-
-def team_names
-  [game_hash[:home][:team_name], game_hash[:away][:team_name]]
-end
-
-def player_numbers(team_name)
-  team(team_name)[:players].map do |key, value|
-    value[:number]
+  game_hash.each do |team, team_data|
+    team_data[:players].each do |player|
+      if player[:player_name] == player_name
+        return player[:shoe]
+      end
+    end
   end
 end
 
+def team_colors(team_name)
+  game_hash.each do |team, team_data|
+    if team_data[:team_name] == team_name
+      return team_data[:colors]
+    end
+  end
+end
+
+def team_names
+  game_hash.collect do |team, team_data|
+    team_data[:team_name]
+  end
+end
+
+def player_numbers(team_name)
+  numbers_array = []
+  game_hash.each do |team, team_data|
+    if team_data[:team_name] == team_name
+      team_data[:players].each do |player|
+        player.each do |number, number_value|
+          if number == :number
+            numbers_array << number_value
+          end
+        end
+      end
+    end
+  end
+  numbers_array
+end
+
 def player_stats(player_name)
-  players[player_name]
+  player_stats = {}
+  game_hash.each do |team, team_data|
+    team_data[:players].each do |stats|
+      if stats[:player_name] == player_name
+        player_stats = stats
+      end
+    end
+  end
+  player_stats
 end
 
 def big_shoe_rebounds
@@ -180,3 +203,4 @@ def big_shoe_rebounds
   end
   num_rebounds
 end
+
