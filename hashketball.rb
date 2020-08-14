@@ -167,14 +167,4 @@ def player_stats(player_name)
   players[player_name]
 end
 
-def big_shoe_rebounds
-  shoe_size = 0
-  num_rebounds = 0
-      if players[:shoe] > shoe_size
-        shoe_size = stats[:shoe]
-        num_rebounds = stats[:rebounds]
-      end
-    end
-  end
-  num_rebounds
-end
+
