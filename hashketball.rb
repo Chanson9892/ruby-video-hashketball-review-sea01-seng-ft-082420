@@ -142,9 +142,9 @@ end
 
 def team_colors(team_name)
   case team_name
-  when "Brooklyn Nets"
+  when game_hash[:home][:team_name]
     game_hash[:home][:colors]
-  when "Charlotte Hornets"
+  when game_hash[:away][:team_name]
     game_hash[:away][:colors]
   end
 end
