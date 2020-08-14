@@ -135,13 +135,8 @@ def num_points_scored(player_name)
 end
 
 def shoe_size(player_name)
-  game_hash.each do |team, team_data|
-    team_data[:players].each do |player|
-      if player[:player_name] == player_name
-        return player[:shoe]
-      end
-    end
-  end
+  players = game_hash[:home][:players].merge(game_hash[:away][:players])
+  players[player_name][:shoe]
 end
 
 def team_colors(team_name)
