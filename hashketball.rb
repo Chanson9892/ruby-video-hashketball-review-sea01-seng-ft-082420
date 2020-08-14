@@ -150,12 +150,7 @@ def shoe_size(player_name)
 end
 
 def team_colors(team_name)
-  case team_name
-  when game_hash[:home][:team_name]
-    game_hash[:home][:colors]
-  when game_hash[:away][:team_name]
-    game_hash[:away][:colors]
-  end
+  team(team_name)[:colors]
 end
 
 def team_names
