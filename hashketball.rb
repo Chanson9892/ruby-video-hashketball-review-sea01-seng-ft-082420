@@ -142,7 +142,9 @@ def teams(team_name)
 end
 
 def num_points_scored(player_name)
-  players = game_hash[:home][:players].merge(game_hash[:away][:players])
+  home_team = game_hash[:home][:players]
+  away_team = game_hash[:away][:players]
+  players = home_team.merge(away_team)
   players[player_name][:points]
 end
 
